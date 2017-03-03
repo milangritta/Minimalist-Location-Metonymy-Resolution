@@ -3,18 +3,17 @@ import cPickle
 from spacy.en import English
 import spacy
 
-
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
-name = "FILE_NAME"
-label = 1
+name = "FILE_NAME"  # Input file name.
+label = 1  #  1 is for METONYMY/NON-LITERAL, 0 is for LITERAL
 inp = codecs.open("./data/" + name + ".txt", mode="r", encoding="utf-8")
 # PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
 # ENTITY<SEP>sentence<ENT>ENTITY<ENT>rest of sentence.
 # Germany<SEP>Their privileges as permanent Security Council members, especially the right of veto, 
 # had been increasingly questioned by <ENT>Germany<ENT> and Japan which, as major economic powers.
 out = []
-seq_length = 50
+seq_length = 50  # There are THREE baselines in the paper (5, 10, 50) so use this integer to set it.
 
 
 def locate_entity(document, ent, left_w, right_w):
