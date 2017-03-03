@@ -6,11 +6,15 @@ import spacy
 
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
-name = "comp_mix_train"
+name = "FILE_NAME"
 label = 1
-inp = codecs.open("../data/" + name + ".txt", mode="r", encoding="utf-8")
+inp = codecs.open("./data/" + name + ".txt", mode="r", encoding="utf-8")
+# PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
+# ENTITY<SEP>sentence<ENT>ENTITY<ENT>rest of sentence.
+# Germany<SEP>Their privileges as permanent Security Council members, especially the right of veto, 
+# had been increasingly questioned by <ENT>Germany<ENT> and Japan which, as major economic powers.
 out = []
-seq_length = 10
+seq_length = 5
 
 
 def locate_entity(document, ent, left_w, right_w):
@@ -40,10 +44,6 @@ def pad(coll, from_left):
     return coll
 
 
-def is_bidirectional(index, start):
-    return True  # to be finished...
-
-
 for line in inp:
     line = line.split(u"<SEP>")
     sentence = line[1].split(u"<ENT>")
@@ -56,7 +56,6 @@ for line in inp:
     words = []
     index = locate_entity(en_doc, entity, tokenizer(sentence[0].strip()), tokenizer(sentence[2].strip()))
     start = find_start(en_doc[index])
-    # bidirectional = is_bidirectional(index, start)
     if start.i > index:
         if index + 1 < len(en_doc) and en_doc[index + 1].dep_ in [u"case", u"compound", u"amod"] \
                 and en_doc[index + 1].head == en_doc[index]:  # any neighbouring word that links to it
@@ -77,5 +76,5 @@ for line in inp:
     print(left, right)
     print(dep_left, dep_right)
     print(line[1])
-print("Processed:", len(out))
+print("Processed:", len(out), " lines/sentences.")
 cPickle.dump(out, open("./pickle/" + name + ".pkl", "w"))
