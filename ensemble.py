@@ -4,8 +4,8 @@ import itertools
 
 final = []
 semeval = True
-for r in range(1, 6):
-    directory = "./ensemble_mix/" if semeval else "./relocar/"
+for r in range(1, 3):
+    directory = "./semeval/" if semeval else "./relocar/"
     for names in itertools.combinations(listdir(directory), r=r):
         files = []
         for f in names:
