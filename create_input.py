@@ -3,10 +3,9 @@ import cPickle
 from spacy.en import English
 import spacy
 
-
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
-name = "FILE_NAME"
+name = "FILE_NAME"  #  Please specify the input file name.
 label = 1
 inp = codecs.open("./data/" + name + ".txt", mode="r", encoding="utf-8")
 # PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
@@ -14,7 +13,7 @@ inp = codecs.open("./data/" + name + ".txt", mode="r", encoding="utf-8")
 # Germany<SEP>Their privileges as permanent Security Council members, especially the right of veto, 
 # had been increasingly questioned by <ENT>Germany<ENT> and Japan which, as major economic powers.
 out = []
-seq_length = 5
+seq_length = 5  #  A window of 5 is the DEFAULT for the PUBLICATION methodology. Feel free to experiment.
 
 
 def locate_entity(document, ent, left_w, right_w):
@@ -26,7 +25,7 @@ def locate_entity(document, ent, left_w, right_w):
             if left_w == '' or document[index - 1].text == left_w:
                 if right_w == '' or document[index + len(ent)].text == right_w:
                     return index + len(ent) - 1
-    raise Exception()
+    raise Exception()  #  If this is ever triggered, there are problems parsing the text. Check SpaCy output!
 
 
 def find_start(old):
