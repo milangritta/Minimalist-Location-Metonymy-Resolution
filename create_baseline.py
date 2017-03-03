@@ -6,12 +6,13 @@ import spacy
 
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
-inp = codecs.open("./path/to/your/data.txt", mode="r", encoding="utf-8")
+name = "FILE_NAME"
+label = 1
+inp = codecs.open("./data/" + name + ".txt", mode="r", encoding="utf-8")
 # PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
 # ENTITY<SEP>sentence<ENT>ENTITY<ENT>rest of sentence.
 # Germany<SEP>Their privileges as permanent Security Council members, especially the right of veto, 
 # had been increasingly questioned by <ENT>Germany<ENT> and Japan which, as major economic powers.
-label = 1
 out = []
 seq_length = 50
 
@@ -54,4 +55,4 @@ for line in inp:
     print(dep_left, dep_right)
     print(line[1])
 print("Processed:", len(out), " lines/sentences.")
-cPickle.dump(out, open("./pickle/NAME_OF_OUTFILE.pkl", "w"))
+cPickle.dump(out, open("./pickle/" + name + ".pkl", "w"))
