@@ -14,8 +14,8 @@ random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
 dimensionality = 50
 seq_length = 50
-print("Dimensionality:", dimensionality)
-print("Sequence Length: 2 times ", seq_length)
+print("Embedding Dimensionality:", dimensionality)
+print("Input Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
 neg = cPickle.load(open("./pickle/semeval-neg_base.pkl")) + cPickle.load(open("./pickle/semeval-mix_base.pkl"))
 pos = cPickle.load(open("./pickle/semeval-pos_base.pkl"))
@@ -46,7 +46,7 @@ print("Building sequences...")
 
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
-for line in codecs.open("../archive/data/glove.txt", encoding="utf-8"):
+for line in codecs.open("./path/to/embeddings/such/as/glove.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]
@@ -130,7 +130,7 @@ merged_model.add(Dense(1, activation='sigmoid'))
 merged_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------
-checkpoint = ModelCheckpoint(filepath="../weights/deps_lstm", verbose=0)
+checkpoint = ModelCheckpoint(filepath="./weights/deps_lstm", verbose=0)
 merged_model.fit([X_L, D_L, X_R, D_R], Y, batch_size=16, nb_epoch=6, callbacks=[checkpoint], verbose=1)
 # score, acc = merged_model.evaluate([X_L, D_L, X_R, D_R], Y, verbose=1)
 # print('')
