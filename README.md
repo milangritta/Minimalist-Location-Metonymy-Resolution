@@ -1,5 +1,13 @@
-# MetonymyResolution
+# Vancouver Welcomes You! Minimalist Location Metonymy Resolution
 
-The code and data accompanying the publication
+Welcome to the home of the code and data accompanying the publication.
 
-Instructions to come...
+> "Science is a wonderful thing if one does not have to earn one's living at it." -- Albert Einstein
+---
+## Python libraries requirements
+* keras - www.keras.io
+* nltk - www.nltk.org
+* spacy - www.spacy.io
+
+## How to replicate
+
