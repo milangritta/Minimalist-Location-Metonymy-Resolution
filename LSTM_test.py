@@ -14,16 +14,16 @@ random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
 dimensionality = 50
 seq_length = 50
-print("Dimensionality:", dimensionality)
-print("Sequence Length: 2 times ", seq_length)
+print("Embedding Dimensionality:", dimensionality)
+print("Input Sequence Length: 2 x ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
 if True:
-    neg = cPickle.load(open("../deps/pickle/semeval-neg_test_base.pkl"))
-    neg.extend(cPickle.load(open("../deps/pickle/semeval-mix_test_base.pkl")))
-    pos = cPickle.load(open("../deps/pickle/semeval-pos_test_base.pkl"))
+    neg = cPickle.load(open("./pickle/semeval-neg_test_base.pkl"))
+    neg.extend(cPickle.load(open("./pickle/semeval-mix_test_base.pkl")))
+    pos = cPickle.load(open("./pickle/semeval-pos_test_base.pkl"))
 else:
-    neg = cPickle.load(open("../deps/pickle/relocar_neg_base.pkl")) + cPickle.load(open("../deps/pickle/relocar_mix_base.pkl"))
-    pos = cPickle.load(open("../deps/pickle/relocar_pos_base.pkl"))
+    neg = cPickle.load(open("./pickle/relocar_neg_base.pkl")) + cPickle.load(open("./pickle/relocar_mix_base.pkl"))
+    pos = cPickle.load(open("./pickle/relocar_pos_base.pkl"))
 
 A = []
 for coll in [neg, pos]:
@@ -48,7 +48,7 @@ print("Building sequences...")
 
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
-for line in codecs.open("../archive/data/glove.txt", encoding="utf-8"):
+for line in codecs.open("./path/to/embeddings/such/as/glove.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]
@@ -123,7 +123,7 @@ merged_model = Sequential()
 merged_model.add(Merge([model_left, dep_left, model_right, dep_right], mode='concat', concat_axis=1))
 merged_model.add(Dense(10))
 merged_model.add(Dense(1, activation='sigmoid'))
-merged_model.load_weights("../weights/deps_lstm")
+merged_model.load_weights("./weights/deps_lstm")
 merged_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------
@@ -137,6 +137,4 @@ if True:
         if p[0] != y:
             print([str(y)] + a[0] + a[2])
     # out = codecs.open("./gold/gold_rel.txt", mode="w", encoding="utf-8")
-    # for p in Y:
-    #     out.write(str(p) + '\n')
 #  --------------------------------------------------------------------------------------------------------------------
