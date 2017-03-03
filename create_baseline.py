@@ -7,7 +7,7 @@ import spacy
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
 inp = codecs.open("./path/to/your/data.txt", mode="r", encoding="utf-8")
-# PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW FOLLWOFFS:
+# PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
 # ENTITY<SEP>sentence<ENT>ENTITY<ENT>rest of sentence.
 # Germany<SEP>Their privileges as permanent Security Council members, especially the right of veto, 
 # had been increasingly questioned by <ENT>Germany<ENT> and Japan which, as major economic powers.
