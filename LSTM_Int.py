@@ -18,9 +18,9 @@ print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
 if True:
-    neg = cPickle.load(open("../deps/pickle/neg_test_base.pkl"))
-    neg.extend(cPickle.load(open("../deps/pickle/mix_test_base.pkl")))
-    pos = cPickle.load(open("../deps/pickle/pos_test_base.pkl"))
+    neg = cPickle.load(open("../deps/pickle/semeval-neg_test_base.pkl"))
+    neg.extend(cPickle.load(open("../deps/pickle/semeval-mix_test_base.pkl")))
+    pos = cPickle.load(open("../deps/pickle/semeval-pos_test_base.pkl"))
 else:
     neg = cPickle.load(open("../deps/pickle/relocar_neg_base.pkl")) + cPickle.load(open("../deps/pickle/relocar_mix_base.pkl"))
     pos = cPickle.load(open("../deps/pickle/relocar_pos_base.pkl"))
