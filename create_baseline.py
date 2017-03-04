@@ -25,7 +25,7 @@ def locate_entity(document, ent, left_w, right_w):
             if left_w == '' or document[index - 1].text == left_w:
                 if right_w == '' or document[index + len(ent)].text == right_w:
                     return index + len(ent) - 1
-    raise Exception()
+    raise Exception()  #  If this is ever triggered, there are problems parsing the text. Check SpaCy output!
 
 
 def pad(coll, from_left):
