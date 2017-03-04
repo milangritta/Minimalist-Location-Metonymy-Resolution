@@ -13,7 +13,7 @@ np.random.seed(133)
 random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
 dimensionality = 50
-seq_length = 50
+seq_length = 50  #  Set to 5 for PreWin method from my PUBLICATION
 print("Embedding Dimensionality:", dimensionality)
 print("Input Sequence Length: 2 x ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
