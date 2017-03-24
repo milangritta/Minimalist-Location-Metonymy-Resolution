@@ -4,7 +4,7 @@ import itertools
 
 final = []
 semeval = True  #  TRUE if evaluating SEMEVAL files, FALSE for RELOCAR files.
-for r in range(1, 3):
+for r in range(1, 4):
     directory = "./semeval/" if semeval else "./relocar/"
     for names in itertools.combinations(listdir(directory), r=r):
         files = []
