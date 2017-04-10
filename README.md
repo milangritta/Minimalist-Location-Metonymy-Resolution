@@ -21,6 +21,7 @@ To fully replicate the results, you need to download the GloVe embeddings and sa
 * _/ReLocaR/_ -> this folder contains the RAW xml files (one of the paper contributions). There is the ReLocaR.xml for __testing__ and ReLocaR-T.xml for __training__. Processed versions of both of these files are available for easy replication in the /pickle/ folder.
 * _/gold/_ -> The gold standard results used for evaluation, no need to change.
 * _/data/_ -> this directory contains text data from four different datasets (relocar, semeval, conll, wikipedia). Feel free to dabble and add new files, however, for replication purposes, these have already been processed and sit inside the /pickle/ folder.
+* _data/locations.txt_ -> This is the list of locations used to construct ReLocaR, as mentioned in the publication.
 * _/pickle/_ -> this directory holds the input files (already processed with our methods such as PREWIN and BASELINE) ready to be plugged into the neural networks. The naming scheme should be selfexplanatory (famous last words). Get in touch if unclear.
 * _/weights/_ -> this directory stores the neural network trained weights. No need to change or modify.
 
