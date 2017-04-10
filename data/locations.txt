@@ -1,0 +1,129 @@
+Afghanistan
+Kabul
+Albania
+Tirana
+Andorra
+Andorra la Vella
+Angola
+Luanda
+Antigua and Barbuda
+Argentina
+Buenos Aires
+Armenia
+Yerevan
+Australia
+Canberra
+Austria
+Vienna
+Azerbaijan
+Baku
+Bahamas
+Nassau, Bahamas
+Bahrain
+Manama
+Bangladesh
+Dhaka
+Barbados
+Bridgetown
+Belarus
+Minsk
+Belgium
+Brussels
+Belize
+Belmopan
+Benin
+Porto-Novo
+Bhutan
+Thimphu
+Bolivia
+La Paz
+Bosnia and Herzegovina
+Sarajevo
+Botswana
+Gaborone
+Brazil
+Bulgaria
+Sofia
+Chile
+Santiago
+China
+Beijing
+Colombia
+Cyprus
+Denmark
+Egypt
+Finland
+France
+Germany
+Berlin
+Ghana
+Greece
+Athens
+Grenada
+San Francisco
+Iceland
+India
+Iran
+Tehran
+Iraq
+Baghdad
+Israel
+Jerusalem
+Italy
+Japan
+Tokyo
+Jordan
+Lebanon
+Beirut
+Malaysia
+Mexico
+Monaco
+Mongolia
+Nepal
+Kathmandu
+Netherlands
+New Zealand
+Norway
+Pakistan
+Panama
+Dublin
+Russia
+South Africa
+Pretoria
+South Korea
+Seoul
+Spain
+Sudan
+Sweden
+Stockholm
+Switzerland
+Syria
+Damascus
+Taiwan
+Taipei
+Thailand
+Tunisia
+Tunis
+Turkey
+Ukraine
+Kiev
+United Arab Emirates
+United Kingdom
+London
+United States
+Washington DC
+Venezuela
+Caracas
+Vietnam
+Hanoi
+Western Sahara
+Laayoune
+Yemen
+Sana’a
+Zambia
+Lusaka
+Zimbabwe
+Harare
+US
+UK
+USA
