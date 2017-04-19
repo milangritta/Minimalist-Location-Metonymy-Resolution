@@ -17,14 +17,14 @@ seq_length = 5
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
-if False:
-    neg = cPickle.load(open("../deps/pickle/semeval_metonymic_test.pkl"))
-    neg.extend(cPickle.load(open("../deps/pickle/semeval_mixed_test.pkl")))
-    pos = cPickle.load(open("../deps/pickle/semeval_literal_test.pkl"))
+if True:
+    neg = cPickle.load(open("pickle/semeval_metonymic_test.pkl"))
+    neg.extend(cPickle.load(open("pickle/semeval_mixed_test.pkl")))
+    pos = cPickle.load(open("pickle/semeval_literal_test.pkl"))
 else:
-    neg = cPickle.load(open("../deps/pickle/relocar_metonymic_test.pkl")) \
-          + cPickle.load(open("../deps/pickle/relocar_mixed_test.pkl"))
-    pos = cPickle.load(open("../deps/pickle/relocar_literal_test.pkl"))
+    neg = cPickle.load(open("pickle/relocar_metonymic_test.pkl")) \
+          + cPickle.load(open("pickle/relocar_mixed_test.pkl"))
+    pos = cPickle.load(open("pickle/relocar_literal_test.pkl"))
 
 A = []
 for coll in [neg, pos]:
@@ -40,7 +40,7 @@ for a in copy.deepcopy(A):
     Y.append(a[4])
 
 print('No of test examples: ', len(X_L))
-dep_labels = cPickle.load(open("./pickle/dep_labels.pkl"))
+dep_labels = cPickle.load(open("pickle/dep_labels.pkl"))
 #  --------------------------------------------------------------------------------------------------------------------
 vocabulary = {u"<u>", u"0.0"}
 vocab_limit = 100000
@@ -49,7 +49,7 @@ print("Building sequences...")
 
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
-for line in codecs.open("../archive/data/glove.txt", encoding="utf-8"):
+for line in codecs.open("/Users/milangritta/PycharmProjects/Keras/archive/data/glove.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]
@@ -130,7 +130,7 @@ merged_model = Sequential()
 merged_model.add(Merge([model_left, dep_left, model_right, dep_right], mode='concat', concat_axis=1))
 merged_model.add(Dense(10))
 merged_model.add(Dense(1, activation='sigmoid'))
-merged_model.load_weights("../weights/deps_lstm")
+merged_model.load_weights("./weights/lstm.hdf5")
 merged_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------

@@ -17,12 +17,11 @@ seq_length = 5
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
-neg = cPickle.load(open("./pickle/semeval_metonymic_train.pkl")) + cPickle.load(open("./pickle/semeval_mixed_train.pkl"))
-pos = cPickle.load(open("./pickle/semeval_literal_train.pkl"))
+# neg = cPickle.load(open("pickle/semeval_metonymic_train.pkl")) + cPickle.load(open("pickle/semeval_mixed_train.pkl"))
+# pos = cPickle.load(open("pickle/semeval_literal_train.pkl"))
 
-# neg = cPickle.load(open("../deps/pickle/relocar_metonymic_test.pkl")) \
-#           + cPickle.load(open("../deps/pickle/relocar_mixed_test.pkl"))
-# pos = cPickle.load(open("../deps/pickle/relocar_literal_test.pkl"))
+neg = cPickle.load(open("pickle/relocar_metonymic_test.pkl")) + cPickle.load(open("pickle/relocar_mixed_test.pkl"))
+pos = cPickle.load(open("pickle/relocar_literal_test.pkl"))
     
 A = []
 dep_labels = {u"<u>"}
@@ -40,8 +39,8 @@ for a in A:
     Y.append(a[4])
 
 print('No of training examples: ', len(X_L))
-cPickle.dump(dep_labels, open("./pickle/dep_labels.pkl", "w"))
-dep_labels = cPickle.load(open("./pickle/dep_labels.pkl"))
+cPickle.dump(dep_labels, open("pickle/dep_labels.pkl", "w"))
+dep_labels = cPickle.load(open("pickle/dep_labels.pkl"))
 #  --------------------------------------------------------------------------------------------------------------------
 vocabulary = {u"<u>", u"0.0"}
 vocab_limit = 100000
@@ -50,7 +49,7 @@ print("Building sequences...")
 
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
-for line in codecs.open("../archive/data/glove.txt", encoding="utf-8"):
+for line in codecs.open("/Users/milangritta/PycharmProjects/Keras/archive/data/glove.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]
@@ -134,9 +133,6 @@ merged_model.add(Dense(1, activation='sigmoid'))
 merged_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------
-checkpoint = ModelCheckpoint(filepath="../weights/deps_lstm", verbose=0)
+checkpoint = ModelCheckpoint(filepath="./weights/lstm.hdf5", verbose=0)
 merged_model.fit([X_L, D_L, X_R, D_R], Y, batch_size=16, nb_epoch=5, callbacks=[checkpoint], verbose=1)
-# score, acc = merged_model.evaluate([X_L, D_L, X_R, D_R], Y, verbose=1)
-# print('')
-# print('Test accuracy:', acc)
 #  --------------------------------------------------------------------------------------------------------------------
