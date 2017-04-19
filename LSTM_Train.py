@@ -21,9 +21,8 @@ regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
 
 # neg = cPickle.load(open("pickle/semeval_metonymic_train.pkl")) + cPickle.load(open("pickle/semeval_mixed_train.pkl"))
 # pos = cPickle.load(open("pickle/semeval_literal_train.pkl"))
-
-neg = cPickle.load(open("pickle/relocar_metonymic_train.pkl"))
-pos = cPickle.load(open("pickle/relocar_literal_train.pkl"))
+neg = cPickle.load(open("pickle/conll_metonymic.pkl"))
+pos = cPickle.load(open("pickle/conll_literal.pkl"))
     
 A = []
 dep_labels = {u"<u>"}
@@ -31,7 +30,9 @@ for coll in [neg, pos]:
     for l in coll:
         A.append(l)
         dep_labels.update(set(l[1][-seq_length:] + l[3][:seq_length]))
+
 random.shuffle(A)
+
 X_L, D_L, X_R, D_R, Y = [], [], [], [], []
 for a in A:
     X_L.append(a[0][-seq_length:])

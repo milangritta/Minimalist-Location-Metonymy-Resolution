@@ -17,7 +17,7 @@ seq_length = 5  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
-if True:  # Remember to choose the CORRECT file names below otherwise you will see bad things happen :-)
+if False:  # Remember to choose the CORRECT file names below otherwise you will see bad things happen :-)
     neg = cPickle.load(open("pickle/semeval_metonymic_test.pkl"))
     neg.extend(cPickle.load(open("pickle/semeval_mixed_test.pkl")))
     pos = cPickle.load(open("pickle/semeval_literal_test.pkl"))
@@ -26,13 +26,8 @@ else:
     neg.extend(cPickle.load(open("pickle/relocar_mixed_test.pkl")))
     pos = cPickle.load(open("pickle/relocar_literal_test.pkl"))
 
-A = []
-for coll in [neg, pos]:
-    for l in coll:
-        A.append(l)
-
 X_L, D_L, X_R, D_R, Y = [], [], [], [], []
-for a in copy.deepcopy(A):
+for a in copy.deepcopy(neg + pos):
     X_L.append(a[0][-seq_length:])
     D_L.append(a[1][-seq_length:])
     X_R.append(a[2][:seq_length])
