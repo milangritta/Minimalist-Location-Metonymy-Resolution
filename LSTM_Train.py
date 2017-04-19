@@ -13,16 +13,16 @@ np.random.seed(133)
 random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
 dimensionality = 50  # No need to adjust, unless you want to experiment with custom embeddings
-seq_length = 5  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
+seq_length = 10  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
 # Remember to choose the CORRECT file names below otherwise you will see bad things happen :-)
 
-# neg = cPickle.load(open("pickle/semeval_metonymic_train.pkl")) + cPickle.load(open("pickle/semeval_mixed_train.pkl"))
-# pos = cPickle.load(open("pickle/semeval_literal_train.pkl"))
-neg = cPickle.load(open("pickle/conll_metonymic.pkl"))
-pos = cPickle.load(open("pickle/conll_literal.pkl"))
+# neg = cPickle.load(open("pickle/semeval_metonymic_train_base.pkl")) + cPickle.load(open("pickle/semeval_mixed_train_base.pkl"))
+# pos = cPickle.load(open("pickle/semeval_literal_train_base.pkl"))
+neg = cPickle.load(open("pickle/relocar_metonymic_train_base.pkl"))
+pos = cPickle.load(open("pickle/relocar_literal_train_base.pkl"))
     
 A = []
 dep_labels = {u"<u>"}

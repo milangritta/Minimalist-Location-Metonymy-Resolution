@@ -5,7 +5,7 @@ import spacy
 
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
-name = "relocar_metonymic_test"  # Input file name.
+name = "semeval_mixed_test"  # Input file name.
 label = 1  # 1 is for METONYMY/NON-LITERAL, 0 is for LITERAL
 inp = codecs.open("data/" + name + ".txt", mode="r", encoding="utf-8")
 # PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
