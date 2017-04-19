@@ -5,15 +5,15 @@ import spacy
 
 tokenizer = English(parser=False)
 en_nlp = spacy.load('en')
-name = "FILE_NAME"  #  Please specify the input file name.
-label = 1  #  1 is for METONYMY/NON-LITERAL, 0 is for LITERAL
+name = "FILE_NAME"  # Please specify the input file name.
+label = 1  # 1 is for METONYMY/NON-LITERAL, 0 is for LITERAL
 inp = codecs.open("./data/" + name + ".txt", mode="r", encoding="utf-8")
 # PLEASE FORMAT THE INPUT FILE AS ONE SENTENCE PER LINE. SEE BELOW:
 # ENTITY<SEP>sentence<ENT>ENTITY<ENT>rest of sentence.
 # Germany<SEP>Their privileges as permanent Security Council members, especially the right of veto, 
 # had been increasingly questioned by <ENT>Germany<ENT> and Japan which, as major economic powers.
 out = []
-seq_length = 5  #  A window of 5 is the DEFAULT for the PUBLICATION methodology. Feel free to experiment.
+seq_length = 5  # A window of 5 is the DEFAULT for the PUBLICATION methodology. Feel free to experiment.
 
 
 def locate_entity(document, ent, left_w, right_w):
@@ -25,7 +25,7 @@ def locate_entity(document, ent, left_w, right_w):
             if left_w == '' or document[index - 1].text == left_w:
                 if right_w == '' or document[index + len(ent)].text == right_w:
                     return index + len(ent) - 1
-    raise Exception()  #  If this is ever triggered, there are problems parsing the text. Check SpaCy output!
+    raise Exception()  # If this is ever triggered, there are problems parsing the text. Check SpaCy output!
 
 
 def find_start(old):
@@ -76,4 +76,4 @@ for line in inp:
     print(dep_left, dep_right)
     print(line[1])
 print("Processed:", len(out), " lines/sentences.")
-cPickle.dump(out, open("./pickle/" + name + ".pkl", "w"))
+cPickle.dump(out, open("pickle/" + name + ".pkl", "w"))

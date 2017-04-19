@@ -6,7 +6,6 @@ Welcome to the home of the code and data accompanying the publication.
 ---
 ## Python libraries requirements
 * keras 1.2.2 - www.keras.io
-* nltk - www.nltk.org
 * spacy - www.spacy.io
 
 ## Embeddings

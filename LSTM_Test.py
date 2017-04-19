@@ -12,18 +12,18 @@ from keras.models import Sequential
 np.random.seed(133)
 random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
-dimensionality = 50
-seq_length = 5
+dimensionality = 50  # No need to adjust, unless you want to experiment with custom embeddings
+seq_length = 5  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
-if True:
+if True:  # Remember to choose the CORRECT file names below otherwise you will see bad things happen :-)
     neg = cPickle.load(open("pickle/semeval_metonymic_test.pkl"))
     neg.extend(cPickle.load(open("pickle/semeval_mixed_test.pkl")))
     pos = cPickle.load(open("pickle/semeval_literal_test.pkl"))
 else:
-    neg = cPickle.load(open("pickle/relocar_metonymic_test.pkl")) \
-          + cPickle.load(open("pickle/relocar_mixed_test.pkl"))
+    neg = cPickle.load(open("pickle/relocar_metonymic_test.pkl"))
+    neg.extend(cPickle.load(open("pickle/relocar_mixed_test.pkl")))
     pos = cPickle.load(open("pickle/relocar_literal_test.pkl"))
 
 A = []
@@ -49,6 +49,7 @@ print("Building sequences...")
 
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
+# Please supply your own embeddings, see README.md for details
 for line in codecs.open("/Users/milangritta/PycharmProjects/Keras/archive/data/glove.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
@@ -136,14 +137,11 @@ print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------
 score = merged_model.evaluate([X_L, D_L, X_R, D_R], Y, batch_size=16, verbose=0)
 print('Test accuracy:', score[1])
-name = "lstm-sem"
+name = "relocar_default"
 if False:
-    # out = codecs.open("./ensemble_mix/" + name + ".txt", mode="w", encoding="utf-8")
+    out = codecs.open("./semeval/" + name + ".txt", mode="w", encoding="utf-8")
     for p, a, y in zip(merged_model.predict_classes([X_L, D_L, X_R, D_R]), A, Y):
-        # out.write(str(p[0]) + '\n')
-        if p[0] != y:
-            print([str(y)] + a[0] + a[2])
-    # out = codecs.open("./gold/gold_rel.txt", mode="w", encoding="utf-8")
-    # for p in Y:
-    #     out.write(str(p) + '\n')
+        out.write(str(p[0]) + '\n')
+        # if p[0] != y:
+        #     print([str(y)] + a[0] + a[2])
 #  --------------------------------------------------------------------------------------------------------------------

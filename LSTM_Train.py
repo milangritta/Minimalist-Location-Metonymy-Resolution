@@ -12,16 +12,18 @@ from keras.models import Sequential
 np.random.seed(133)
 random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
-dimensionality = 50
-seq_length = 5
+dimensionality = 50  # No need to adjust, unless you want to experiment with custom embeddings
+seq_length = 5  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
+# Remember to choose the CORRECT file names below otherwise you will see bad things happen :-)
+
 # neg = cPickle.load(open("pickle/semeval_metonymic_train.pkl")) + cPickle.load(open("pickle/semeval_mixed_train.pkl"))
 # pos = cPickle.load(open("pickle/semeval_literal_train.pkl"))
 
-neg = cPickle.load(open("pickle/relocar_metonymic_test.pkl")) + cPickle.load(open("pickle/relocar_mixed_test.pkl"))
-pos = cPickle.load(open("pickle/relocar_literal_test.pkl"))
+neg = cPickle.load(open("pickle/relocar_metonymic_train.pkl"))
+pos = cPickle.load(open("pickle/relocar_literal_train.pkl"))
     
 A = []
 dep_labels = {u"<u>"}
@@ -49,6 +51,7 @@ print("Building sequences...")
 
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
+# Please supply your own embeddings, see README.md for details
 for line in codecs.open("/Users/milangritta/PycharmProjects/Keras/archive/data/glove.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
