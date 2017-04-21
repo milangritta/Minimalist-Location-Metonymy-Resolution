@@ -4,16 +4,16 @@ import re
 import copy
 import cPickle
 import numpy as np
+# np.random.seed(133)
+# random.seed(133)
 from keras.engine import Merge
 from keras.layers import Embedding, TimeDistributed, Flatten
 from keras.layers.core import Dense, Dropout
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential
-np.random.seed(133)
-random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
 dimensionality = 50  # No need to adjust, unless you want to experiment with custom embeddings
-seq_length = 10  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
+seq_length = 5  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
@@ -45,7 +45,7 @@ print("Building sequences...")
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
 # Please supply your own embeddings, see README.md for details
-for line in codecs.open("/Users/milangritta/PycharmProjects/Keras/archive/data/glove.txt", encoding="utf-8"):
+for line in codecs.open("/Users/milangritta/Downloads/glove.6B/glove.6B.50d.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]
@@ -127,14 +127,14 @@ merged_model.add(Merge([model_left, dep_left, model_right, dep_right], mode='con
 merged_model.add(Dense(10))
 merged_model.add(Dense(1, activation='sigmoid'))
 merged_model.load_weights("./weights/lstm.hdf5")
-merged_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+merged_model.compile(loss='binary_crossentropy', optimizer='adagrad', metrics=['accuracy'])
 print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------
 score = merged_model.evaluate([X_L, D_L, X_R, D_R], Y, batch_size=16, verbose=0)
 print('Test accuracy:', score[1])
-name = "relocar_default"
-if False:
-    out = codecs.open("./semeval/" + name + ".txt", mode="w", encoding="utf-8")
+name = "conll_base5"
+if True:
+    out = codecs.open("./relocar/" + name + ".txt", mode="w", encoding="utf-8")
     for p, y in zip(merged_model.predict_classes([X_L, D_L, X_R, D_R]), Y):
         out.write(str(p[0]) + '\n')
 #  --------------------------------------------------------------------------------------------------------------------

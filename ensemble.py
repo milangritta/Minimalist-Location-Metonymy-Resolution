@@ -3,7 +3,7 @@ from os import listdir
 import itertools
 
 final = []
-semeval = False
+semeval = True
 # TRUE if evaluating SEMEVAL files, FALSE for RELOCAR files.
 for r in range(1, 4):
     directory = "./semeval/" if semeval else "./relocar/"
@@ -36,34 +36,29 @@ for r in range(1, 4):
 final = sorted(final, key=lambda (x, y, z): x, reverse=True)
 for res in final[:]:
     print('Processing:' + res[1], "Accuracy:", res[0])
+    # --------------------------- Precision and recall ----------------------------------#
+    met_count = 187 if semeval else 514
+    tp, fp = 0.0, 0.0
+    for index in range(met_count):
+        if final[0][2][index] == 1:
+            tp += 1
+    fn = met_count - tp
+    for prediction in final[0][2][met_count:]:
+        if prediction == 1:
+            fp += 1
+    precision = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    print("MET: Precision:", precision, "Recall:", recall, "F Score:", 2 * precision * recall / (precision + recall))
 
-# --------------------------- Precision and recall ----------------------------------#
-met_count = 187 if semeval else 514
-tp, fp = 0.0, 0.0
-for index in range(met_count):
-    if final[0][2][index] == 1:
-        tp += 1
-fn = met_count - tp
-for prediction in final[0][2][met_count:]:
-    if prediction == 1:
-        fp += 1
-precision = tp / (tp + fp)
-recall = tp / (tp + fn)
-print("Precision:", precision)
-print("Recall:", recall)
-print("F Score:", 2 * precision * recall / (precision + recall))
-
-tp, fp = 0.0, 0.0
-prediction_count = len(final[0][2])
-for index in range(met_count, prediction_count):
-    if final[0][2][index] == 0:
-        tp += 1
-fn = prediction_count - met_count - tp
-for prediction in final[0][2][:met_count]:
-    if prediction == 0:
-        fp += 1
-precision = tp / (tp + fp)
-recall = tp / (tp + fn)
-print("Precision:", precision)
-print("Recall:", recall)
-print("F Score:", 2 * precision * recall / (precision + recall))
+    tp, fp = 0.0, 0.0
+    prediction_count = len(final[0][2])
+    for index in range(met_count, prediction_count):
+        if final[0][2][index] == 0:
+            tp += 1
+    fn = prediction_count - met_count - tp
+    for prediction in final[0][2][:met_count]:
+        if prediction == 0:
+            fp += 1
+    precision = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    print("LIT: Precision:", precision, "Recall:", recall, "F Score:", 2 * precision * recall / (precision + recall))

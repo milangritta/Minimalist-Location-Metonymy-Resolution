@@ -2,28 +2,27 @@ import codecs
 import random
 import re
 import cPickle
-from keras.callbacks import ModelCheckpoint
 import numpy as np
+from keras.callbacks import ModelCheckpoint
 from keras.engine import Merge
 from keras.layers import Embedding, TimeDistributed, Flatten
 from keras.layers.core import Dense, Dropout
 from keras.layers.recurrent import LSTM
 from keras.models import Sequential
-np.random.seed(133)
-random.seed(133)
+# np.random.seed(133)
+# random.seed(133)
 #  --------------------------------------------------------------------------------------------------------------------
 dimensionality = 50  # No need to adjust, unless you want to experiment with custom embeddings
-seq_length = 10  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
+seq_length = 5  # Adjust to 5 for PreWin and 5, 10, 50 for baseline results
 print("Dimensionality:", dimensionality)
 print("Sequence Length: 2 times ", seq_length)
 regex = re.compile(r"[+-.]?\d+[-.,\d+:]*(th|st|nd|rd)?")
 # Remember to choose the CORRECT file names below otherwise you will see bad things happen :-)
-
 # neg = cPickle.load(open("pickle/semeval_metonymic_train_base.pkl")) + cPickle.load(open("pickle/semeval_mixed_train_base.pkl"))
 # pos = cPickle.load(open("pickle/semeval_literal_train_base.pkl"))
-neg = cPickle.load(open("pickle/relocar_metonymic_train_base.pkl"))
-pos = cPickle.load(open("pickle/relocar_literal_train_base.pkl"))
-    
+neg = cPickle.load(open("pickle/conll_metonymic_train_base.pkl"))
+pos = cPickle.load(open("pickle/conll_literal_train_base.pkl"))
+
 A = []
 dep_labels = {u"<u>"}
 for coll in [neg, pos]:
@@ -53,7 +52,7 @@ print("Building sequences...")
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
 # Please supply your own embeddings, see README.md for details
-for line in codecs.open("/Users/milangritta/PycharmProjects/Keras/archive/data/glove.txt", encoding="utf-8"):
+for line in codecs.open("/Users/milangritta/Downloads/glove.6B/glove.6B.50d.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]
@@ -134,7 +133,7 @@ merged_model = Sequential()
 merged_model.add(Merge([model_left, dep_left, model_right, dep_right], mode='concat', concat_axis=1))
 merged_model.add(Dense(10))
 merged_model.add(Dense(1, activation='sigmoid'))
-merged_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+merged_model.compile(loss='binary_crossentropy', optimizer='adagrad', metrics=['accuracy'])
 print(u"Done...")
 #  --------------------------------------------------------------------------------------------------------------------
 checkpoint = ModelCheckpoint(filepath="./weights/lstm.hdf5", verbose=0)

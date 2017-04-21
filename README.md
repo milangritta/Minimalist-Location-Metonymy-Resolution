@@ -5,14 +5,15 @@ Welcome to the home of the code and data accompanying the publication.
 
 ---
 ## Python libraries requirements
-* keras 1.2.2 - www.keras.io
-* spacy - www.spacy.io
+* keras 1.2.2 - www.keras.io (for best replicability, go for Theano backend, not Tensorflow)
+* spacy - www.spacy.io and also download the English embeddings as instructed on the website
 
 ## Embeddings
 To fully replicate the results and due to GitHub's file size limits (100MB today), you need to download the GloVe embeddings and save in a local directory. Go to http://nlp.stanford.edu/projects/glove/ and change the PATH to the embeddings in the LSTM\_(Train/Test).py files. Please use the 50D embeddings for publication results unless you want to experiment with bigger dimensions. The final file size is around 175MB. You can also Google the DOI of our paper for the complete set of data.
 
-## How to replicate (because that's how you do science!)
-* _ensemble.py_ -> this is the evaluation script (accuracy, precision, recall, f-score). It can be used for ReLocaR and SemEval evaluation (see internal comments for usage instructions). Both the ensemble approach and single model results will be calculated, see output.
+## How to replicate
+I fixed some random seeds, however, due to the complexity of Keras/Theano, there is still some random initiation happening, so please do multiple runs and take the average.
+* _ensemble.py_ -> this is the ensemble method evaluation script (accuracy, precision, recall, f-score). It can be used for ReLocaR and SemEval evaluation (see internal comments for usage instructions). Both the ensemble approach and single model results will be calculated, see output.
 * _create_prewin.py_ -> this is the preprocessing script used for taking TEXT files and outputting the processed pickled files for LSTM_train(and test).py. For replication purposes, this script applies the __PREWIN__ method to text, see paper. There are ready pickled files in the /pickle/ directory (for replication) but feel free to create new input from new text.
 * _create_baseline.py_ - > another preprocessing script for TEXT to PICKLED input (for replication purposes, use this script for ALL __baselines__ in the paper). See internal comments for details of usage.
 * _LSTM_Train.py_ -> The MAIN script for training the classifier. Please check the paths to input files (choose from /pickle/ or prepare your own with the create....py scripts), edit path to embeddings file and RUN :-) To get the EXACT numbers as reported in the paper, you may have to adjust the number of epochs in training (± 1).
