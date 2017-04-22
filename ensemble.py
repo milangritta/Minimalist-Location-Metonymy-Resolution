@@ -40,10 +40,10 @@ for res in final[:]:
     met_count = 187 if semeval else 514
     tp, fp = 0.0, 0.0
     for index in range(met_count):
-        if final[0][2][index] == 1:
+        if res[2][index] == 1:
             tp += 1
     fn = met_count - tp
-    for prediction in final[0][2][met_count:]:
+    for prediction in res[2][met_count:]:
         if prediction == 1:
             fp += 1
     precision = tp / (tp + fp)
@@ -51,12 +51,12 @@ for res in final[:]:
     print("MET: Precision:", precision, "Recall:", recall, "F Score:", 2 * precision * recall / (precision + recall))
 
     tp, fp = 0.0, 0.0
-    prediction_count = len(final[0][2])
+    prediction_count = len(res[2])
     for index in range(met_count, prediction_count):
-        if final[0][2][index] == 0:
+        if res[2][index] == 0:
             tp += 1
     fn = prediction_count - met_count - tp
-    for prediction in final[0][2][:met_count]:
+    for prediction in res[2][:met_count]:
         if prediction == 0:
             fp += 1
     precision = tp / (tp + fp)
