@@ -45,7 +45,7 @@ print("Building sequences...")
 count = 0
 vectors_glove = {u'<u>': np.ones(dimensionality)}
 # Please supply your own embeddings, see README.md for details
-for line in codecs.open("/Users/milangritta/Downloads/glove.6B/glove.6B.50d.txt", encoding="utf-8"):
+for line in codecs.open("data/glove.6B.50d.txt", encoding="utf-8"):
     tokens = line.split()
     vocabulary.add(tokens[0])
     vectors_glove[tokens[0]] = [float(x) for x in tokens[1:]]

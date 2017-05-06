@@ -3,7 +3,7 @@ from os import listdir
 import itertools
 
 final = []
-semeval = True
+semeval = False
 # TRUE if evaluating SEMEVAL files, FALSE for RELOCAR files.
 for r in range(1, 4):
     directory = "./semeval/" if semeval else "./relocar/"
@@ -62,3 +62,4 @@ for res in final[:]:
     precision = tp / (tp + fp)
     recall = tp / (tp + fn)
     print("LIT: Precision:", precision, "Recall:", recall, "F Score:", 2 * precision * recall / (precision + recall))
+    print()
