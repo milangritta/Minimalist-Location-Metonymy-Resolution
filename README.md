@@ -1,7 +1,7 @@
 # Vancouver Welcomes You! 
 # Minimalist Location Metonymy Resolution
 
-Welcome to the home of the code and data accompanying the publication.
+Welcome to the home of the code and data accompanying the publication. The talk took place on 2.8.2017 in Vancouver, Canada, you can view my personal video recording here https://www.youtube.com/watch?v=LwGWyxRCtwY&t=33s
 
 ---
 ## Python libraries requirements
