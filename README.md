@@ -1,7 +1,9 @@
 # Vancouver Welcomes You! 
 # Minimalist Location Metonymy Resolution
 
-Welcome to the home of the code and data accompanying the publication. The talk took place on 2.8.2017 in Vancouver, Canada, you can view my personal video recording here https://www.youtube.com/watch?v=LwGWyxRCtwY&t=33s
+Welcome to the home of the code and data accompanying the "outstanding award" publication at [ACL 2017](http://www.aclweb.org/anthology/P17-1115). The talk took place on 2.8.2017 in Vancouver, Canada, you can view my personal video recording here https://www.youtube.com/watch?v=LwGWyxRCtwY and official footage here https://vimeo.com/channels/acl2017/234945689
+
+> "Science is a wonderful thing if one does not have to earn one's living at it." -- Albert Einstein
 
 ---
 ## Python libraries requirements
@@ -28,3 +30,5 @@ I fixed some random seeds, however, due to the complexity of Keras/Theano, there
 ---
 ### Issues during replication
 Have fun and thanks for stopping by my friend. I tried to make the replication efforts as smooth as possible. I take science replication extremely seriously. In case something is missing, please raise an [issue](https://github.com/milangritta/Minimalist-Location-Metonymy-Resolution/issues) or email me (not difficult to find) and I will address the feedback. Enjoy!
+
+Alternative link for the whole bundle: https://www.repository.cam.ac.uk/handle/1810/265068
